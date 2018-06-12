@@ -1,0 +1,7 @@
+:root {
+  --color: magenta;
+}
+
+* {
+  border: 2px dashed var(--color);
+}
