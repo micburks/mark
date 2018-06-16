@@ -1,0 +1,18 @@
+.Action {
+  align-items: center;
+  color: var(--dark);
+  cursor: pointer;
+  display: flex;
+  font-weight: bold;
+  transition: color .1s;
+}
+
+.Action:hover {
+  text-decoration: underline;
+}
+
+.Action--disabled {
+  color: var(--medium)!important;
+  cursor: inherit!important;
+  text-decoration: none!important;
+}
