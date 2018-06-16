@@ -46,3 +46,5 @@ export async function getFiles (path = '') {
 
   return files
 }
+
+export const prevent = e => (e.preventDefault(), true)

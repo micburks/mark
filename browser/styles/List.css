@@ -1,0 +1,44 @@
+.List {
+  border-right: 2px solid var(--light);
+  color: var(--dark);
+  font-family: var(--accent);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.List-item {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  padding: var(--2gu) var(--2gu);
+}
+
+.List-item--message {
+  display: block!important;
+  text-align: center;
+}
+
+.List-item:hover {
+  background-color: var(--faint);
+}
+
+.List-item.selected {
+  border-left: 4px solid var(--bold);
+  font-style: italic;
+  font-weight: bold;
+}
+
+.List-item--inert {
+  cursor: initial!important;
+  padding-top: 0!important;
+}
+
+.List-item--inert:hover {
+  background-color: inherit!important;
+}
+
+.List-item--message:hover {
+  background-color: inherit!important;
+  cursor: inherit!important;
+}

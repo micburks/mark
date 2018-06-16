@@ -1,0 +1,14 @@
+:root {
+  --bold: rgba(0, 0, 0, .7);
+  --dark: rgba(0, 0, 0, 0.54);
+  --medium: rgba(0, 0, 0, .26);
+  --light: rgba(0, 0, 0, 0.1);
+  --faint: rgba(0, 0, 0, 0.05);
+  --1gu: 8px;
+  --2gu: 16px;
+  --3gu: 24px;
+  --4gu: 32px;
+  --5gu: 40px;
+  --accent: 'Raleway', sans-serif;
+  --body: 'Open Sans', sans-serif;
+}
