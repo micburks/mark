@@ -5,9 +5,8 @@ Mark is a markdown viewer/editor application built on electron
 
 ## Installation
 
-```bash
-npm i -g mark
-```
+*This project is not currently installable as a package*
+
 
 ## Usage
 
