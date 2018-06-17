@@ -1,6 +1,7 @@
 import React from 'react'
 import File from './File.jsx'
 import Dir from './Dir.jsx'
+import { onEnter } from '../utils.js'
 
 export default function Filelist (props) {
   let content
@@ -37,6 +38,8 @@ export default function Filelist (props) {
       <li className="List-item List-item--inert">
         <span className={`Action ${props.isRoot ? 'Action--disabled' : ''}`}
           onClick={props.isRoot ? ()=>{} : props.back}
+          onKeyUp={onEnter(props.isRoot ? ()=>{} : props.back)}
+          tabIndex="0"
         >
           <i className="material-icons">chevron_left</i>
           BACK
