@@ -10,6 +10,8 @@ export const readFileSync = path => {
   return fs.readFileSync(path, { encoding: 'utf-8' })
 }
 
+export const writeFile = promisify(fs.writeFile)
+
 export function getRoot () {
   if (process.argv > 2) {
     return process.argv[2]
@@ -22,7 +24,7 @@ const isMd = name => /\.md$/.test(name)
 const hasNoExt = name => /^[^.]+$/.test(name)
 const isDotfile = name => /^\./.test(name)
 const hasMdOrNoExt = name => (isMd(name) || hasNoExt(name))
-const isNotNull = val => (val !== null)
+export const isNotNull = val => (val !== null)
 
 async function isDir (path) {
   const stats = await stat(path)
