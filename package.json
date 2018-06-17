@@ -21,11 +21,13 @@
     "parcel-bundler": "^1.8.1"
   },
   "dependencies": {
+    "codemirror": "^5.38.0",
     "dompurify": "^1.0.5",
     "electron": "^2.0.2",
     "github-markdown-css": "^2.10.0",
     "highlight.js": "^9.12.0",
     "marked": "^0.4.0",
+    "mousetrap": "^1.6.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
   }

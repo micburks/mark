@@ -5,11 +5,13 @@
 @import './styles/Action.css';
 @import 'github-markdown-css';
 @import 'highlight.js/styles/github.css';
+@import 'codemirror/lib/codemirror.css';
 
 *, *:before, *:after { box-sizing: border-box; }
 body { margin: 0; }
 
 .Header {
+  background-color: var(--faint);
   border-bottom: 2px solid var(--light);
   color: var(--bold);
   font-family: var(--accent);
@@ -56,4 +58,9 @@ body { margin: 0; }
   .markdown-body {
     padding: 15px;
   }
+}
+
+/* CodeMirror override */
+.CodeMirror {
+  height: auto;
 }

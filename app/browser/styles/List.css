@@ -31,6 +31,7 @@
 
 .List-item--inert {
   cursor: initial!important;
+  padding-left: var(--1gu);
   padding-top: 0!important;
 }
 

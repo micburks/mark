@@ -1,6 +1,7 @@
 import React from 'react'
+import mousetrap from 'mousetrap'
 import { join } from 'path'
-import { getFiles, readFileSync } from '../utils.js'
+import { getFiles, isNotNull, readFileSync } from '../utils.js'
 import Header from './Header.jsx'
 import Breadcrumbs from './Breadcrumbs.jsx'
 import Filelist from './Filelist.jsx'
@@ -12,7 +13,9 @@ export default class App extends React.Component {
     this.state = {
       selectedIndex: null,
       path: [],
-      files: []
+      files: [],
+      unsaved: {},
+      editing: false
     }
   }
 
@@ -32,7 +35,6 @@ export default class App extends React.Component {
   }
 
   changeDir (name) {
-    console.log(this.state.path, name)
     const newPath = [...this.state.path, name]
 
     this.setDir(newPath)
@@ -50,7 +52,8 @@ export default class App extends React.Component {
     this.setState({
       selectedIndex: null,
       files: [],
-      path
+      path,
+      editing: false
     })
 
     // TODO: Bug here becuase state hasn't changed by the time we fetch new files
@@ -69,7 +72,7 @@ export default class App extends React.Component {
       selectedIndex = null
     }
 
-    this.setState({ selectedIndex })
+    this.setState({ selectedIndex, editing: false })
   }
 
   componentDidMount () {
@@ -77,13 +80,49 @@ export default class App extends React.Component {
       .then(files => {
         this.setState({ files })
       })
+    mousetrap.bind(['command+e', 'ctrl+e'], () => {
+      if (isNotNull(this.state.selectedIndex)) {
+        this.setState({ editing: !this.state.editing })
+      }
+    })
+  }
+
+  getFileStatus () {
+    const path = this.state.path.join('/')
+
+    if (path in this.state.unsaved) {
+      const status = this.state.unsaved[path]
+
+      return this.state.files.map(file => {
+        if (file.name in status) {
+          return Object.assign({}, file, { unsaved: true })
+        } else {
+          return file
+        }
+      })
+    } else {
+      return this.state.files
+    }
+  }
+
+  setUnsaved () {
+    const path = this.state.path.join('/')
+    const { unsaved } = this.state
+
+    unsaved[path] = unsaved[path] || {}
+    unsaved[path][name] = true
+
+    this.setState({ unsaved })
   }
 
   render () {
     return (
       <div className="Grid">
         <Header>markdown browser</Header>
-        <Breadcrumbs path={this.state.path} selectDir={(e, name) => this.selectDir(e, name)} selectRootDir={() => this.setDir([])} />
+        <Breadcrumbs path={this.state.path}
+          selectDir={(e, name) => this.selectDir(e, name)}
+          selectRootDir={() => this.setDir([])}
+        />
         <Filelist files={this.state.files}
           selectedIndex={this.state.selectedIndex}
           back={() => this.back()}
@@ -91,7 +130,14 @@ export default class App extends React.Component {
           selectDir={name => this.changeDir(name)}
           isRoot={this.state.path.length < 1}
         />
-        <Detail path={this.state.path} file={this.state.files[this.state.selectedIndex]} />
+        <Detail path={this.state.path}
+          file={this.state.files[this.state.selectedIndex]}
+          editing={this.state.editing}
+          setUnsaved={() => this.setUnsaved()}
+          exit={() => this.setState({ editing: false })}
+          showSaved={()=>{}}
+          mode={"vim"}
+        />
       </div>
     )
   }
