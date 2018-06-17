@@ -72,3 +72,10 @@ export async function getFiles (path = '') {
 }
 
 export const prevent = e => (e.preventDefault(), true)
+export function onEnter (fn) {
+  return e => {
+    if (e.which === 13) {
+      return fn()
+    }
+  }
+}
