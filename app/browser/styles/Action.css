@@ -16,3 +16,48 @@
   cursor: inherit!important;
   text-decoration: none!important;
 }
+
+.Action--toggle * {
+  display: inline-block;
+}
+
+.Action--toggle:hover {
+  text-decoration: none;
+}
+
+.Action--toggle input[type="checkbox"] {
+  opacity: 0;
+}
+
+.Action--toggle input[type="checkbox"] ~.Action-control {
+  background-color: var(--faint);
+  border: 1px solid var(--dark);
+  border-radius: 10px;
+  content: "";
+  height: 10px;
+  left: -5px;
+  position: relative;
+  transition: all .5s;
+  width: 30px;
+}
+
+.Action--toggle input[type="checkbox"] ~.Action-control:after {
+  background-color: gray;
+  border: 1px solid var(--dark);
+  border-radius: 100%;
+  content: "";
+  height: 16px;
+  left: -7px;
+  position: absolute;
+  transition: all .5s;
+  top: -4px;
+  width: 16px;
+}
+
+.Action--toggle input[type="checkbox"]:checked ~.Action-control {
+  background-color: var(--okay);
+}
+
+.Action--toggle input[type="checkbox"]:checked ~ .Action-control:after {
+  left: calc(100% - 11px);
+}

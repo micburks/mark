@@ -15,7 +15,8 @@ export default class App extends React.Component {
       path: [],
       files: [],
       unsaved: {},
-      editing: false
+      editing: false,
+      vim: true
     }
   }
 
@@ -115,10 +116,20 @@ export default class App extends React.Component {
     this.setState({ unsaved })
   }
 
+  toggleVimMode () {
+    this.setState({ vim: !this.state.vim })
+  }
+
   render () {
     return (
       <div className="Grid">
-        <Header>markdown browser</Header>
+        <Header
+          controlLabel="vim mode"
+          onControlChange={()=>this.toggleVimMode()}
+          controlEnabled={this.state.vim}
+        >
+          markdown browser
+        </Header>
         <Breadcrumbs path={this.state.path}
           selectDir={(e, name) => this.selectDir(e, name)}
           selectRootDir={() => this.setDir([])}
@@ -136,7 +147,7 @@ export default class App extends React.Component {
           setUnsaved={() => this.setUnsaved()}
           exit={() => this.setState({ editing: false })}
           showSaved={()=>{}}
-          mode={"vim"}
+          mode={this.state.vim ? 'vim' : 'default'}
         />
       </div>
     )
