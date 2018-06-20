@@ -42,6 +42,7 @@ export default class Detail extends React.Component {
           setUnsaved={this.props.setUnsaved}
           exit={this.props.exit}
           mode={this.props.mode}
+          key={this.props.mode}
         />
       )
     } else {
