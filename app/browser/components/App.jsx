@@ -24,8 +24,12 @@ export default class App extends React.Component {
     return join(...this.state.path)
   }
 
-  getFiles () {
-    return getFiles(this.getCurrentDirectory())
+  getFiles (path = null) {
+    if (!path) {
+      path = this.getCurrentDirectory()
+    }
+
+    return getFiles(path)
   }
 
   back () {
@@ -57,13 +61,10 @@ export default class App extends React.Component {
       editing: false
     })
 
-    // TODO: Bug here becuase state hasn't changed by the time we fetch new files
-    setTimeout(() => {
-      this.getFiles()
-        .then(files => {
-          this.setState({ files })
-        })
-    })
+    this.getFiles(join(...path))
+      .then(files => {
+        this.setState({ files })
+      })
   }
 
   selectFile (index) {
