@@ -11,7 +11,7 @@
   align-items: center;
   cursor: pointer;
   display: flex;
-  padding: var(--2gu) var(--2gu);
+  padding: var(--2gu);
 }
 
 .List-item--message {
@@ -27,16 +27,6 @@
   border-left: 4px solid var(--bold);
   font-style: italic;
   font-weight: bold;
-}
-
-.List-item--inert {
-  cursor: initial!important;
-  padding-left: var(--1gu);
-  padding-top: 0!important;
-}
-
-.List-item--inert:hover {
-  background-color: inherit!important;
 }
 
 .List-item--message:hover {

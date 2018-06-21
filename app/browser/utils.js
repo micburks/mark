@@ -4,6 +4,8 @@ import { default as fs, readdir } from 'fs'
 
 const stat = promisify(fs.stat)
 
+export const noOp = ()=>{}
+
 export const readDir = promisify(readdir)
 
 export const readFileSync = path => {

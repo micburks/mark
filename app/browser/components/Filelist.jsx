@@ -1,7 +1,11 @@
 import React from 'react'
 import File from './File.jsx'
 import Dir from './Dir.jsx'
-import { onEnter } from '../utils.js'
+import { onEnter, noOp } from '../utils.js'
+
+function LeftIcon () {
+  return <i className="material-icons">chevron_left</i>
+}
 
 export default function Filelist (props) {
   let content
@@ -34,18 +38,18 @@ export default function Filelist (props) {
   }
 
   return (
-    <ul className={`List Grid-cell--sidebar ${emptyClass}`}>
-      <li className="List-item List-item--inert">
+    <div className="Grid-cell--sidebar">
+      <div className="Action-group">
         <span className={`Action ${props.isRoot ? 'Action--disabled' : ''}`}
-          onClick={props.isRoot ? ()=>{} : props.back}
-          onKeyUp={onEnter(props.isRoot ? ()=>{} : props.back)}
+          onClick={props.isRoot ? noOp : props.back}
+          onKeyUp={onEnter(props.isRoot ? noOp : props.back)}
           tabIndex="0"
         >
-          <i className="material-icons">chevron_left</i>
-          BACK
+          <LeftIcon/>
+          <span className="Action-text">BACK</span>
         </span>
-      </li>
-      {content}
-    </ul>
+      </div>
+      <ul className={`List ${emptyClass}`}>{content}</ul>
+    </div>
   )
 }
