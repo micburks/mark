@@ -1,6 +1,7 @@
 .Action-group {
   display: flex;
-  padding: 0 0 var(--1gu) var(--1gu)!important;
+  justify-content: space-between;
+  padding: 0 var(--1gu) var(--1gu)!important;
 }
 
 .Action {

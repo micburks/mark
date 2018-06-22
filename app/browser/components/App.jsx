@@ -11,25 +11,38 @@ export default class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedIndex: null,
-      path: [],
-      files: [],
-      unsaved: {},
       editing: false,
+      files: [],
+      newVisible: false,
+      path: [],
+      selectedIndex: null,
+      unsaved: {},
       vim: true
     }
+
+    this.back = this.back.bind(this)
+    this.changeDir = this.changeDir.bind(this)
+    this.refreshFileList = this.refreshFileList.bind(this)
+    this.selectDir = this.selectDir.bind(this)
+    this.selectFile = this.selectFile.bind(this)
+    this.setDir = this.setDir.bind(this)
+    this.setUnsaved = this.setUnsaved.bind(this)
+    this.toggle = this.toggle.bind(this)
   }
 
   getCurrentDirectory () {
     return join(...this.state.path)
   }
 
-  getFiles (path = null) {
+  retrieveFiles (path = null) {
     if (!path) {
       path = this.getCurrentDirectory()
     }
 
     return getFiles(path)
+      .then(files => {
+        this.setState({ files })
+      })
   }
 
   back () {
@@ -61,10 +74,11 @@ export default class App extends React.Component {
       editing: false
     })
 
-    this.getFiles(join(...path))
-      .then(files => {
-        this.setState({ files })
-      })
+    this.retrieveFiles(join(...path))
+  }
+
+  refreshFileList () {
+    this.retrieveFiles()
   }
 
   selectFile (index) {
@@ -78,10 +92,8 @@ export default class App extends React.Component {
   }
 
   componentDidMount () {
-    this.getFiles()
-      .then(files => {
-        this.setState({ files })
-      })
+    this.retrieveFiles()
+
     mousetrap.bind(['command+e', 'ctrl+e'], () => {
       if (isNotNull(this.state.selectedIndex)) {
         this.setState({ editing: !this.state.editing })
@@ -117,39 +129,58 @@ export default class App extends React.Component {
     this.setState({ unsaved })
   }
 
-  toggleVimMode () {
-    this.setState({ vim: !this.state.vim })
+  toggle (prop, val) {
+    return () => {
+      if (typeof val === 'undefined') {
+        val = !this.state[prop]
+      }
+
+      this.setState({ [prop]: val })
+    }
   }
 
   render () {
     return (
       <div className="Grid">
-        <Header
-          controlLabel="vim mode"
-          onControlChange={()=>this.toggleVimMode()}
-          controlEnabled={this.state.vim}
-        >
-          markdown browser
-        </Header>
-        <Breadcrumbs path={this.state.path}
-          selectDir={(e, name) => this.selectDir(e, name)}
-          selectRootDir={() => this.setDir([])}
-        />
-        <Filelist files={this.state.files}
-          selectedIndex={this.state.selectedIndex}
-          back={() => this.back()}
-          selectFile={index => this.selectFile(index)}
-          selectDir={name => this.changeDir(name)}
-          isRoot={this.state.path.length < 1}
-        />
-        <Detail path={this.state.path}
-          file={this.state.files[this.state.selectedIndex]}
-          editing={this.state.editing}
-          setUnsaved={() => this.setUnsaved()}
-          exit={() => this.setState({ editing: false })}
-          showSaved={()=>{}}
-          mode={this.state.vim ? 'vim' : 'default'}
-        />
+        <div className="Grid-cell--header">
+          <Header controlLabel="vim mode"
+            onControlChange={this.toggle('vim')}
+            controlEnabled={this.state.vim}
+          >
+            markdown browser
+          </Header>
+        </div>
+        <div className="Grid-cell--banner">
+          <Breadcrumbs path={this.state.path}
+            selectDir={this.selectDir}
+            selectRootDir={() => this.setDir([])}
+          />
+        </div>
+        <div className="Grid-cell--sidebar">
+          <Filelist files={this.state.files}
+            selectedIndex={this.state.selectedIndex}
+            back={this.back}
+            selectFile={this.selectFile}
+            selectDir={this.changeDir}
+            isRoot={this.state.path.length < 1}
+            newCallback={this.toggle('newVisible', true)}
+          />
+        </div>
+        <div className="Grid-cell--body">
+          <Detail path={this.state.path}
+            file={this.state.files[this.state.selectedIndex]}
+            editing={this.state.editing}
+            setUnsaved={this.setUnsaved}
+            exit={this.toggle('editing', false)}
+            showSaved={()=>{}}
+            mode={this.state.vim ? 'vim' : 'default'}
+          />
+        </div>
+        {this.state.newVisible &&
+            <Modal exit={this.toggle('newVisible', false)}>
+              <NewFileOrFolder callback={this.refreshFileList} path={this.state.path}/>
+            </Modal>
+        }
       </div>
     )
   }

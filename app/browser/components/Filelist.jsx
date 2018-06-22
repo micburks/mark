@@ -2,14 +2,18 @@ import React from 'react'
 import File from './File.jsx'
 import Dir from './Dir.jsx'
 import { onEnter, noOp } from '../utils.js'
-
-function LeftIcon () {
-  return <i className="material-icons">chevron_left</i>
-}
+import { LeftIcon, PlusIcon } from './Icons.jsx'
 
 export default function Filelist (props) {
   let content
   let emptyClass = ''
+  let backClick = props.back
+  let backClass = 'Action'
+
+  if (props.isRoot) {
+    backClick = noOp
+    backClass = `${backClass} Action--disabled`
+  }
 
   if (props.files.length > 0) {
     content = props.files.map(
@@ -38,15 +42,15 @@ export default function Filelist (props) {
   }
 
   return (
-    <div className="Grid-cell--sidebar">
+    <div>
       <div className="Action-group">
-        <span className={`Action ${props.isRoot ? 'Action--disabled' : ''}`}
-          onClick={props.isRoot ? noOp : props.back}
-          onKeyUp={onEnter(props.isRoot ? noOp : props.back)}
-          tabIndex="0"
-        >
+        <span className={backClass} onClick={backClick} onKeyUp={onEnter(backClick)} tabIndex="0">
           <LeftIcon/>
           <span className="Action-text">BACK</span>
+        </span>
+        <span className="Action" onClick={props.newCallback} onKeyUp={onEnter(props.newCallback)} tabIndex="0">
+          <span className="Action-text">NEW</span>
+          <PlusIcon/>
         </span>
       </div>
       <ul className={`List ${emptyClass}`}>{content}</ul>

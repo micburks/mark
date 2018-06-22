@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Header (props) {
   return (
-    <div className="Header Grid-cell--header">
+    <div className="Header">
       <h1 className="Header-text">{props.children}</h1>
       <div className="Header-action Action Action--toggle">
         <label htmlFor="Header-control">{props.controlLabel}</label>

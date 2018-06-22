@@ -12,7 +12,7 @@ export default function Breadcrumbs (props) {
   }
 
   return (
-    <small className="Breadcrumbs Grid-cell--banner">
+    <small className="Breadcrumbs">
       {rootLink}
       {props.path.map((slug, index) =>
         <span className="Breadcrumbs-item" key={index}>
