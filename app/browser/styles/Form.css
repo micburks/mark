@@ -5,7 +5,8 @@
 
 .Form-title,
 .Form-input,
-.Form-submit {
+.Form-submit,
+.Form-error {
   color: var(--dark);
   font-family: var(--body);
 }
@@ -39,4 +40,8 @@
   display: inline-block;
   padding: var(--1gu);
   width: 75px;
+}
+
+.Form-error {
+  color: var(--error);
 }

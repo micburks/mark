@@ -80,7 +80,9 @@ export default class App extends React.Component {
     this.retrieveFiles(join(...path))
   }
 
-  refreshFileList () {
+  refreshFileList (type) {
+    this.setState({ newVisible: false })
+    this.successMessage(`${type} created`)
     this.retrieveFiles()
   }
 
@@ -132,6 +134,10 @@ export default class App extends React.Component {
     this.setState({ unsaved })
   }
 
+  successMessage (msg) {
+    console.log(msg)
+  }
+
   toggle (prop, val) {
     return () => {
       if (typeof val === 'undefined') {
@@ -175,7 +181,7 @@ export default class App extends React.Component {
             editing={this.state.editing}
             setUnsaved={this.setUnsaved}
             exit={this.toggle('editing', false)}
-            showSaved={()=>{}}
+            showSaved={() => this.successMessage('file saved')}
             mode={this.state.vim ? 'vim' : 'default'}
           />
         </div>
