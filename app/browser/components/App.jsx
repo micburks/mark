@@ -7,6 +7,8 @@ import Header from './Header.jsx'
 import Breadcrumbs from './Breadcrumbs.jsx'
 import Filelist from './Filelist.jsx'
 import Detail from './Detail.jsx'
+import Modal from './Modal.jsx'
+import NewFileOrFolder from './NewFileOrFolder.jsx'
 
 export default class App extends React.Component {
   constructor (props) {

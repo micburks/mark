@@ -1,0 +1,42 @@
+.Form {
+  padding: var(--2gu);
+  width: 500px;
+}
+
+.Form-title,
+.Form-input,
+.Form-submit {
+  color: var(--dark);
+  font-family: var(--body);
+}
+
+.Form-group {
+  display: block;
+  margin-bottom: var(--1gu);
+}
+
+.Form-group:last-child {
+  margin-bottom: 0;
+}
+
+.Form-group--right {
+  text-align: right;
+}
+
+.Form-title {
+  margin: 0 0 var(--2gu);
+}
+
+.Form-input {
+  display: inline-block;
+  padding: var(--1gu);
+  width: 100%;
+}
+
+.Form-submit {
+  background-color: var(--light);
+  border: 1px solid var(--faint);
+  display: inline-block;
+  padding: var(--1gu);
+  width: 75px;
+}
