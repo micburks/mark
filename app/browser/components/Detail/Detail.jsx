@@ -1,10 +1,11 @@
+import './Detail.css'
 import React from 'react'
 import marked from 'marked'
 import mousetrap from 'mousetrap'
 import { join } from 'path'
 import { sanitize } from 'dompurify'
-import { isNotNull } from '../utils/type.js'
-import { readFileSync, writeFile } from '../utils/file.js'
+import { isNotNull } from '../../utils/type.js'
+import { readFileSync, writeFile } from '../../utils/file.js'
 import { highlightAuto } from 'highlight.js'
 import Editor from './Editor.jsx'
 
