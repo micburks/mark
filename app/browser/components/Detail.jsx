@@ -56,7 +56,7 @@ export default class Detail extends React.Component {
       }
 
       return (
-        <div className="Detail Grid-cell--body markdown-body"
+        <div className="Detail markdown-body"
           dangerouslySetInnerHTML={{__html}}
         ></div>
       )
