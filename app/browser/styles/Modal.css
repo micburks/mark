@@ -1,0 +1,31 @@
+.Modal-overlay {
+  align-items: center;
+  background-color: var(--dark);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.Modal-content {
+  background-color: var(--background);
+  display: inline-block;
+  position: relative;
+  min-width: 500px;
+}
+
+.Modal-content > * {
+  margin: auto;
+}
+
+.Modal-close {
+  color: var(--dark);
+  cursor: pointer;
+  font-size: var(--3gu);
+  position: absolute;
+  right: var(--1gu);
+  top: var(--1gu);
+}

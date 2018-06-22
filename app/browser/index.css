@@ -1,14 +1,16 @@
 @import './styles/root.css';
 @import './styles/utilities.css';
-@import './styles/Grid.css';
-@import './styles/List.css';
 @import './styles/Action.css';
+@import './styles/Grid.css';
+@import './styles/Form.css';
+@import './styles/List.css';
+@import './styles/Modal.css';
 @import 'github-markdown-css';
 @import 'highlight.js/styles/github.css';
 @import 'codemirror/lib/codemirror.css';
 
 *, *:before, *:after { box-sizing: border-box; }
-body { margin: 0; }
+body { background-color: var(--background); margin: 0; }
 
 .Header {
   align-items: center;
