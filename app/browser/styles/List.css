@@ -1,5 +1,4 @@
 .List {
-  border-right: 2px solid var(--light);
   color: var(--dark);
   font-family: var(--accent);
   list-style: none;

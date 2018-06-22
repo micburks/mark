@@ -5,8 +5,9 @@
 
 .Form-title,
 .Form-input,
-.Form-submit,
-.Form-error {
+.Form-label,
+.Form-error,
+.Form-submit {
   color: var(--dark);
   font-family: var(--body);
 }
@@ -25,7 +26,12 @@
 }
 
 .Form-title {
+  font-size: var(--2gu);
   margin: 0 0 var(--2gu);
+}
+
+.Form-label {
+  font-size: var(--2gu);
 }
 
 .Form-input {
@@ -34,14 +40,18 @@
   width: 100%;
 }
 
+.Form-dropdown {
+  display: block;
+}
+
+.Form-error {
+  color: var(--error);
+}
+
 .Form-submit {
   background-color: var(--light);
   border: 1px solid var(--faint);
   display: inline-block;
   padding: var(--1gu);
   width: 75px;
-}
-
-.Form-error {
-  color: var(--error);
 }
