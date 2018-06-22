@@ -1,10 +1,9 @@
 import { join } from 'path'
 import { promisify } from 'util'
 import { default as fs, readdir } from 'fs'
+import { isNotNull } from './type.js'
 
 const stat = promisify(fs.stat)
-
-export const noOp = ()=>{}
 
 export const readDir = promisify(readdir)
 
@@ -26,7 +25,6 @@ const isMd = name => /\.md$/.test(name)
 const hasNoExt = name => /^[^.]+$/.test(name)
 const isDotfile = name => /^\./.test(name)
 const hasMdOrNoExt = name => (isMd(name) || hasNoExt(name))
-export const isNotNull = val => (val !== null)
 
 async function isDir (path) {
   const stats = await stat(path)
@@ -71,13 +69,4 @@ export async function getFiles (path = '') {
 
   return Promise.all(files)
     .then(files => files.filter(isNotNull))
-}
-
-export const prevent = e => (e.preventDefault(), true)
-export function onEnter (fn) {
-  return e => {
-    if (e.which === 13) {
-      return fn()
-    }
-  }
 }
