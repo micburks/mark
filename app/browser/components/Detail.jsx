@@ -53,7 +53,7 @@ export default class Detail extends React.Component {
       const __html = sanitize(html)
 
       return (
-        <div className="Detail"
+        <div className="Detail markdown-body"
           dangerouslySetInnerHTML={{__html}}
         ></div>
       )

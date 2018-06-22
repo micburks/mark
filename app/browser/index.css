@@ -1,59 +1,21 @@
 @import './styles/root.css';
 @import './styles/utilities.css';
 @import './styles/Action.css';
-@import './styles/Detail.css';
+@import './styles/Breadcrumbs.css';
 @import './styles/Grid.css';
+@import './styles/Header.css';
 @import './styles/Form.css';
 @import './styles/List.css';
 @import './styles/Modal.css';
-@import 'github-markdown-css';
-@import 'highlight.js/styles/github.css';
-@import 'codemirror/lib/codemirror.css';
+@import './styles/Detail.css';
 
-*, *:before, *:after { box-sizing: border-box; }
-body { background-color: var(--background); margin: 0; }
-
-.Header {
-  align-items: center;
-  background-color: var(--faint);
-  border-bottom: 2px solid var(--light);
-  color: var(--bold);
-  display: flex;
-  font-family: var(--accent);
-  justify-content: space-between;
-  padding: var(--1gu) var(--2gu);
-}
-
-.Header-text {
-  display: inline-block;
-  margin: 0;
-}
-
-.Header-action {
-  position: relative;
-}
-
-.Breadcrumbs {
+*, *:before, *:after {
   box-sizing: border-box;
-  font-family: var(--accent);
-  height: 32px;
-  padding: var(--1gu) var(--2gu);
 }
 
-.Breadcrumbs-item {}
-
-.Breadcrumbs-link {
-  color: var(--dark);
-  text-decoration: none;
-}
-
-.Breadcrumbs-link:hover {
-  text-decoration: underline;
-}
-
-.Breadcrumbs-link--disabled:hover {
-  cursor: default!important;
-  text-decoration: none!important;
+body {
+  background-color: var(--background);
+  margin: 0;
 }
 
 /* CodeMirror override */
