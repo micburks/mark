@@ -4,14 +4,39 @@ import { default as fs, readdir } from 'fs'
 import { isNotNull } from './type.js'
 
 const stat = promisify(fs.stat)
+const access = promisify(fs.access)
+const mkdir = promisify(fs.mkdir)
 
 export const readDir = promisify(readdir)
+export const writeFile = promisify(fs.writeFile)
+
+function reversePromise (promise, then, errorMessage) {
+  return async (...args) => {
+    try {
+      await promise(...args)
+
+      return Promise.reject(new Error(errorMessage))
+    } catch (e) {
+      return then(...args)
+    }
+  }
+}
+
+export const writeNewFile = reversePromise(
+  path => access(path),
+  writeFile,
+  'Name in use; File cannot be created'
+)
+
+export const mkNewDir = reversePromise(
+  path => access(path),
+  mkdir,
+  'Name in use; Directory cannot be created'
+)
 
 export const readFileSync = path => {
   return fs.readFileSync(path, { encoding: 'utf-8' })
 }
-
-export const writeFile = promisify(fs.writeFile)
 
 export function getRoot () {
   if (process.argv > 2) {
