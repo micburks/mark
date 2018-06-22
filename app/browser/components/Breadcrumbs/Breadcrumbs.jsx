@@ -1,5 +1,6 @@
+import './Breadcrumbs.css'
 import React from 'react'
-import { prevent } from '../utils/callback.js'
+import { prevent } from '../../utils/callback.js'
 
 export default function Breadcrumbs (props) {
   let rootLink = ''

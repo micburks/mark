@@ -1,13 +1,9 @@
 @import './styles/root.css';
 @import './styles/utilities.css';
 @import './styles/Action.css';
-@import './styles/Breadcrumbs.css';
-@import './styles/Grid.css';
-@import './styles/Header.css';
 @import './styles/Form.css';
+@import './styles/Grid.css';
 @import './styles/List.css';
-@import './styles/Modal.css';
-@import './styles/Detail.css';
 
 *, *:before, *:after {
   box-sizing: border-box;

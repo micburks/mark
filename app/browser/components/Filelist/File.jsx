@@ -1,5 +1,5 @@
 import React from 'react'
-import { onEnter } from '../utils/callback.js'
+import { onEnter } from '../../utils/callback.js'
 
 export default function File (props) {
   let selectedClass = ''
