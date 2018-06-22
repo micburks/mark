@@ -1,7 +1,10 @@
+@import 'highlight.js/styles/github.css';
+@import 'codemirror/lib/codemirror.css';
+@import 'github-markdown-css';
+
 /* Github markdown container */
 .Detail {
   box-sizing: border-box;
-  font-family: var(--accent);
   min-width: 200px;
   max-width: 980px;
   margin: 0 auto;
@@ -16,5 +19,6 @@
 }
 
 .Detail--empty {
+  font-family: var(--accent);
   text-align: center;
 }

@@ -1,0 +1,22 @@
+.Breadcrumbs {
+  box-sizing: border-box;
+  font-family: var(--accent);
+  height: 32px;
+  padding: var(--1gu) var(--2gu);
+}
+
+.Breadcrumbs-item {}
+
+.Breadcrumbs-link {
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.Breadcrumbs-link:hover {
+  text-decoration: underline;
+}
+
+.Breadcrumbs-link--disabled:hover {
+  cursor: default!important;
+  text-decoration: none!important;
+}

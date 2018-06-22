@@ -1,0 +1,19 @@
+.Header {
+  align-items: center;
+  background-color: var(--faint);
+  border-bottom: 2px solid var(--light);
+  color: var(--bold);
+  display: flex;
+  font-family: var(--accent);
+  justify-content: space-between;
+  padding: var(--1gu) var(--2gu);
+}
+
+.Header-text {
+  display: inline-block;
+  margin: 0;
+}
+
+.Header-action {
+  position: relative;
+}
