@@ -18,6 +18,7 @@
 }
 
 .Grid-cell--sidebar {
+  border-right: 2px solid var(--light);
   grid-area: sidebar;
 }
 

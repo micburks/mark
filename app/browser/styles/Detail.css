@@ -1,0 +1,20 @@
+/* Github markdown container */
+.Detail {
+  box-sizing: border-box;
+  font-family: var(--accent);
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+}
+
+/* Github markdown container mobile */
+@media (max-width: 767px) {
+  .Detail {
+    padding: 15px;
+  }
+}
+
+.Detail--empty {
+  text-align: center;
+}

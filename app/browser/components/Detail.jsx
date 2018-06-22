@@ -46,20 +46,22 @@ export default class Detail extends React.Component {
           key={this.props.mode}
         />
       )
-    } else {
-      let __html = 'No file selected'
-
-      if (this.props.file) {
-        const html = marked(contents, {
-          highlight: code => highlightAuto(code).value
-        })
-        __html = sanitize(html)
-      }
+    } else if (this.props.file) {
+      const html = marked(contents, {
+        highlight: code => highlightAuto(code).value
+      })
+      const __html = sanitize(html)
 
       return (
-        <div className="Detail markdown-body"
+        <div className="Detail"
           dangerouslySetInnerHTML={{__html}}
         ></div>
+      )
+    } else {
+      return (
+        <div className="Detail Detail--empty">
+          No file selected
+        </div>
       )
     }
   }

@@ -1,6 +1,7 @@
 @import './styles/root.css';
 @import './styles/utilities.css';
 @import './styles/Action.css';
+@import './styles/Detail.css';
 @import './styles/Grid.css';
 @import './styles/Form.css';
 @import './styles/List.css';
@@ -32,8 +33,6 @@ body { background-color: var(--background); margin: 0; }
   position: relative;
 }
 
-.Detail {}
-
 .Breadcrumbs {
   box-sizing: border-box;
   font-family: var(--accent);
@@ -55,22 +54,6 @@ body { background-color: var(--background); margin: 0; }
 .Breadcrumbs-link--disabled:hover {
   cursor: default!important;
   text-decoration: none!important;
-}
-
-/* Github markdown container */
-.markdown-body {
-  box-sizing: border-box;
-  min-width: 200px;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 45px;
-}
-
-/* Github markdown container mobile */
-@media (max-width: 767px) {
-  .markdown-body {
-    padding: 15px;
-  }
 }
 
 /* CodeMirror override */
