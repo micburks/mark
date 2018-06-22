@@ -1,7 +1,7 @@
 import React from 'react'
 import File from './File.jsx'
 import Dir from './Dir.jsx'
-import { onEnter, noOp } from '../utils.js'
+import { onEnter, noOp } from '../utils/callback.js'
 import { LeftIcon, PlusIcon } from './Icons.jsx'
 
 export default function Filelist (props) {
