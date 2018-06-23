@@ -16,5 +16,5 @@ body {
 
 /* CodeMirror override */
 .CodeMirror {
-  height: auto;
+  height: auto!important;
 }
