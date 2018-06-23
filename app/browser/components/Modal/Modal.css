@@ -27,5 +27,10 @@
   font-size: var(--3gu);
   position: absolute;
   right: var(--1gu);
+  transition: color .1s;
   top: var(--1gu);
+}
+
+.Modal-close:hover {
+  color: var(--bold);
 }
