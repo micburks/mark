@@ -39,6 +39,7 @@ export const readFileSync = path => {
 }
 
 export function getRoot () {
+  // TODO: This is not correct. Anyway it should get root from application
   if (process.argv > 2) {
     return process.argv[2]
   } else {
