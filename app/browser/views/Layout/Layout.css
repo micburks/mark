@@ -1,4 +1,4 @@
-.Grid {
+.Layout {
   display: grid;
   grid-gap: var(--1gu);
   grid-template-columns: 1fr 3fr;
@@ -10,7 +10,7 @@
   padding-top: 55px;
 }
 
-.Grid-cell--header {
+.Layout-cell--header {
   background-color: white;
   grid-area: header;
   position: fixed;
@@ -18,16 +18,16 @@
   z-index: 6;
 }
 
-.Grid-cell--banner {
+.Layout-cell--banner {
   grid-area: banner;
 }
 
-.Grid-cell--sidebar {
+.Layout-cell--sidebar {
   border-right: 2px solid var(--light);
   grid-area: sidebar;
 }
 
-.Grid-cell--body {
+.Layout-cell--body {
   grid-area: body;
   overflow: auto;
 }
