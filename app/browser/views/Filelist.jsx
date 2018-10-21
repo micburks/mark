@@ -9,7 +9,7 @@ import { Consumer } from '../context.js'
 export default function Wrapper (props) {
   return (
     <Consumer>
-      {({ path }) => <Filelist path={path} key={path.join('/')} />}
+      {state => <Filelist {...state} key={state.path.join('/')} />}
     </Consumer>
   )
 }
@@ -37,30 +37,28 @@ class Filelist extends Component {
     const { files } = this.state
 
     return (files.length > 0)
-      ? <List data={files} />
+      ? <List {...this.props} files={files} />
       : <EmptyList />
   }
 }
 
-function List ({ data }) {
+function List ({ files, path, selectDir, selectFile, selected }) {
   return (
-    <Consumer>
-      {({ path, selectDir, selectFile, selected }) => (
-        <ul className="List">
-          {data && data.map((entry, index) => (
-            <File {...entry}
-              key={index}
-              path={path}
-              selectDir={selectDir}
-              selectFile={selectFile}
-              isSelected={entry.name === selected}
-            >
-              {entry.name}
-            </File>
-          ))}
-        </ul>
-      )}
-    </Consumer>
+    <ul className="List">
+      {files && files.map((entry, index) => (
+        <File
+          key={index}
+          isDir={entry.isDir}
+          name={entry.name}
+          path={path}
+          selectDir={selectDir}
+          selectFile={selectFile}
+          isSelected={entry.name === selected}
+        >
+          {entry.name}
+        </File>
+      ))}
+    </ul>
   )
 }
 
