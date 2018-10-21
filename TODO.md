@@ -20,6 +20,7 @@
 - [ ] rename file
 - [ ] delete folder
 - [ ] rename folder
+- [ ] when leaving exit mode, remove file from unsaved cache if the contents haven't changed from the disk version
 
 ### Style
 - [ ] get rid of unnecessary fonts
