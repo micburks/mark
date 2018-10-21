@@ -1,5 +1,6 @@
 import './Help.css'
 import React from 'react'
+import Markdown from '../Markdown/Markdown.jsx'
 
 export default function Help () {
   return (
@@ -15,12 +16,20 @@ export default function Help () {
         <tr>                        
           <td className="preformatted">*Italic*</td>
           <td className="preformatted second-example">_Italic_</td>
-          <td><em>Italic</em></td>
+          <td>
+            <Markdown>
+              *Italic*
+            </Markdown>
+          </td>
         </tr>
         <tr>                        
           <td className="preformatted">**Bold**</td>
           <td className="preformatted second-example">__Bold__</td>
-          <td><strong>Bold</strong></td>
+          <td>
+            <Markdown>
+              **Bold**
+            </Markdown>
+          </td>
         </tr>
         <tr>
           <td className="preformatted">
@@ -31,7 +40,9 @@ export default function Help () {
             =========
           </td>
           <td>
-            <h1 className="smaller-h1">Heading 1</h1>
+            <Markdown>
+              # Heading 1
+            </Markdown>
           </td>
         </tr>
         <tr>
@@ -43,7 +54,9 @@ export default function Help () {
             ---------
           </td>
           <td>
-            <h2 className="smaller-h2">Heading 2</h2>
+            <Markdown>
+              ## Heading 2
+            </Markdown>
           </td>
         </tr>
         <tr>                        
@@ -55,7 +68,11 @@ export default function Help () {
             &#8942;<br/>
             [1]: http://b.org
           </td>
-          <td><a href="https://commonmark.org/">Link</a></td>
+          <td>
+            <Markdown>
+              [Link](http://a.com)
+            </Markdown>
+          </td>
         </tr>
         <tr>
           <td className="preformatted">
@@ -67,7 +84,9 @@ export default function Help () {
             [1]: http://url/b.jpg
           </td>
           <td>
-            <img src="images/favicon.png" width="36" height="36" alt="Markdown"/>
+            <Markdown>
+              ![Image](https://www.easyicon.net/api/resizeApi.php?id=1157747&size=16)
+            </Markdown>
           </td>
         </tr>
         <tr>
@@ -78,7 +97,9 @@ export default function Help () {
             &nbsp;
           </td>
           <td>
-            <blockquote>Blockquote</blockquote>
+            <Markdown>
+              > Blockquote
+            </Markdown>
           </td>
         </tr>
         <tr>
@@ -97,11 +118,7 @@ export default function Help () {
             </p>
           </td>
           <td>
-            <ul>
-              <li>List</li>
-              <li>List</li>
-              <li>List</li>
-            </ul>
+            <Markdown markdown={"* List\n* List\n* List"} />
           </td>
         </tr>
         <tr>
@@ -120,11 +137,7 @@ export default function Help () {
             </p>
           </td>
           <td>
-            <ol>
-              <li>One</li>
-              <li>Two</li>
-              <li>Three</li>
-            </ol>
+            <Markdown markdown={"1. One\n2. Two\n3. Three"} />
           </td>
         </tr>
         <tr>
@@ -139,8 +152,7 @@ export default function Help () {
             ***
           </td>
           <td>
-            Horizontal Rule
-            <hr className="custom-hr" />
+            <Markdown markdown={"Horizontal Rule\n\n---"} />
           </td>
         </tr>
         <tr>                        
@@ -151,7 +163,9 @@ export default function Help () {
             &nbsp;
           </td>
           <td>
-            <code className="preformatted">Inline code</code> with backticks
+            <Markdown>
+              `Inline code` with backticks
+            </Markdown>
           </td>
         </tr>
         <tr>
@@ -168,11 +182,7 @@ export default function Help () {
             <span className="spaces">····</span>print 'indent 4 spaces'
           </td>
           <td>
-            <div className="code-block">
-              # code block
-              <br/> print '3 backticks or'
-              <br/> print 'indent 4 spaces'
-            </div>
+            <Markdown markdown={"```\n# code block\nprint '3 backticks or'\nprint 'indent 4 spaces'\n```"} />
           </td>
         </tr>                    
       </tbody>

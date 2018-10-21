@@ -19,7 +19,7 @@
 
 .Modal-content {
   padding: var(--1gu) var(--3gu);
-  max-height: 500px;
+  max-height: 700px;
   overflow: auto;
 }
 

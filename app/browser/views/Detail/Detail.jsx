@@ -1,13 +1,11 @@
 import './Detail.css'
 import React, { Component } from 'react'
-import marked from 'marked'
 import mousetrap from 'mousetrap'
 import { join } from 'path'
-import { sanitize } from 'dompurify'
 import { isNotNull } from '../../utils/type.js'
 import { readFile, writeFile } from '../../utils/file.js'
-import { highlightAuto } from 'highlight.js'
-import Editor from './Editor.jsx'
+import Editor from '../Editor.jsx'
+import Markdown from '../Markdown/Markdown.jsx'
 import { Consumer } from '../../context.js'
 
 export default function Wrapper () {
@@ -97,16 +95,7 @@ class Detail extends Component {
       )
     } else {
       // Not editing file contents
-      const html = marked(this.state.contents, {
-        highlight: code => highlightAuto(code).value
-      })
-      const __html = sanitize(html)
-
-      return (
-        <div className="Detail markdown-body"
-          dangerouslySetInnerHTML={{__html}}
-        ></div>
-      )
+      return <Markdown className="Detail" markdown={this.state.contents} />
     }
   }
 }
