@@ -62,18 +62,24 @@ class NewFileOrFolder extends React.Component {
   render () {
     return (
       <form className="Form" onSubmit={this.formSubmit}>
-        <h5 className="Form-title">New</h5>
         <div className="Form-group">
-          <label className="Form-label" htmlFor={`type-${this.state.id}`}>Type</label>
-          <select className="Form-dropdown"
-            id={`type-${this.state.id}`}
-            value={this.state.type}
+          <legend className="Form-legend">Type</legend>
+          <Radio
+            value="file"
+            label="File"
             onChange={this.formChange}
+            id={this.state.id}
+            checked={this.state.type === 'file'}
             name="type"
-          >
-            <option value="file">file</option>
-            <option value="folder">folder</option>
-          </select>
+          />
+          <Radio
+            value="folder"
+            label="Folder"
+            onChange={this.formChange}
+            id={this.state.id}
+            checked={this.state.type === 'folder'}
+            name="type"
+          />
         </div>
         <div className="Form-group">
           <label className="Form-label" htmlFor={`name-${this.state.id}`}>Name</label>
@@ -92,4 +98,27 @@ class NewFileOrFolder extends React.Component {
       </form>
     )
   }
+}
+
+function Radio ({ checked, label, id, name, onChange, value }) {
+  const htmlId = `${value}-${id}`
+
+  return (
+    <div style={{paddingTop: 'var(--1gu)', paddingLeft: 'var(--1gu)'}}>
+      <input
+        className="Form-radio"
+        type="radio"
+        id={htmlId}
+        name={name}
+        value={value}
+        onChange={onChange}
+        checked={checked}
+      />
+      <label className="Form-label" htmlFor={htmlId}>
+        <small style={{textTransform: 'uppercase'}}>
+          {label}
+        </small>
+      </label>
+    </div>
+  )
 }

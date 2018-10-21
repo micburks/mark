@@ -6,10 +6,11 @@
 .Form-title,
 .Form-input,
 .Form-label,
+.Form-legend,
 .Form-error,
 .Form-submit {
   color: var(--dark);
-  font-family: var(--body);
+  font-family: var(--accent);
 }
 
 .Form-group {
@@ -30,11 +31,18 @@
   margin: 0 0 var(--2gu);
 }
 
+.Form-legend,
 .Form-label {
   font-size: var(--2gu);
 }
 
+.Form-radio-label {
+  font-size: var(--1gu);
+}
+
 .Form-input {
+  border: 1px solid var(--dark);
+  border-radius: 1px;
   display: inline-block;
   padding: var(--1gu);
   width: 100%;
@@ -49,9 +57,19 @@
 }
 
 .Form-submit {
-  background-color: var(--light);
-  border: 1px solid var(--faint);
-  display: inline-block;
-  padding: var(--1gu);
-  width: 75px;
+  background-color: white;
+  border: 1px solid var(--dark);
+  border-radius: 1px;
+  color: var(--dark);
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-family: var(--accent);
+  padding: var(--1gu) var(--2gu);
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase;
+  transition: all .1s;
+}
+
+.Form-submit:hover {
+  background-color: var(--faint);
 }

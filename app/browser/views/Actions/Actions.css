@@ -10,7 +10,7 @@
   cursor: pointer;
   display: flex;
   font-weight: bold;
-  transition: color .1s;
+  transition: all .1s;
 }
 
 .Action:not(.Action--disabled):hover .Action-text {
@@ -24,7 +24,7 @@
 }
 
 .Action-button {
-  background-color: var(--primary);
+  background-color: white;
   border: 1px solid var(--dark);
   border-radius: 1px;
   color: var(--dark);
@@ -33,6 +33,10 @@
   padding: var(--1gu) var(--2gu);
   text-rendering: optimizeLegibility;
   text-transform: uppercase;
+}
+
+.Action-button:hover {
+  background-color: var(--faint);
 }
 
 .Action-button.Action--disabled {
