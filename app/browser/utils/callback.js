@@ -1,6 +1,15 @@
 export const noOp = ()=>{}
-export const stop = e => (e.stopPropagation(), true)
-export const prevent = e => (e.preventDefault(), true)
+
+export function stop (e) {
+  e.stopPropagation()
+}
+
+export function prevent (fn) {
+  return e => {
+    e.preventDefault()
+    return fn ? fn() : null
+  }
+}
 
 export function onEnter (fn) {
   return e => {

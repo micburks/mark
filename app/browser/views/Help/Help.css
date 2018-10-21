@@ -1,0 +1,16 @@
+.Help {
+  border-collapse: collapse;
+  font-family: var(--body);
+  text-align: left;
+  width: 750px;
+}
+
+.Help th,
+.Help td {
+  border-bottom: 2px solid var(--light);
+  padding: var(--1gu) 0;
+}
+
+.Help tr:last-child td {
+  border-bottom: none;
+}

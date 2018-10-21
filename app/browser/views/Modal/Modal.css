@@ -10,15 +10,34 @@
   top: 0;
 }
 
-.Modal-content {
+.Modal {
   background-color: var(--background);
-  display: inline-block;
-  position: relative;
+  min-height: 50px;
   min-width: 500px;
+  position: relative;
+}
+
+.Modal-content {
+  padding: var(--1gu) var(--3gu);
+  max-height: 500px;
+  overflow: auto;
 }
 
 .Modal-content > * {
   margin: auto;
+}
+
+.Modal-fixedTop {
+  border-bottom: 1px solid var(--faint);
+  display: block;
+  left: 0;
+  padding: var(--1gu) var(--2gu);
+  top: 0;
+  width: 100%;
+}
+
+.Modal-header {
+  font-family: var(--body);
 }
 
 .Modal-close {

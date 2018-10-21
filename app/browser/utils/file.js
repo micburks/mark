@@ -10,6 +10,11 @@ const mkdir = promisify(fs.mkdir)
 export const readDir = promisify(readdir)
 export const writeFile = promisify(fs.writeFile)
 
+const readFilePromise = promisify(fs.readFile)
+export const readFile = path => {
+  return readFilePromise(path, { encoding: 'utf-8' })
+}
+
 function reversePromise (promise, then, errorMessage) {
   return async (...args) => {
     try {
@@ -33,10 +38,6 @@ export const mkNewDir = reversePromise(
   mkdir,
   'Name in use; Directory cannot be created'
 )
-
-export const readFileSync = path => {
-  return fs.readFileSync(path, { encoding: 'utf-8' })
-}
 
 export function getRoot () {
   if (process.argv > 2) {
