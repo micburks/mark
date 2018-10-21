@@ -19,3 +19,4 @@
 
 ### Style
 - [ ] get rid of unnecessary fonts
+- [ ] responsive design for small screens

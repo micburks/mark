@@ -7,10 +7,15 @@
     "banner banner"
     "sidebar body"
   ;
+  padding-top: 50px;
 }
 
 .Grid-cell--header {
+  background-color: white;
   grid-area: header;
+  position: fixed;
+  width: 100%;
+  z-index: 6;
 }
 
 .Grid-cell--banner {
@@ -24,4 +29,5 @@
 
 .Grid-cell--body {
   grid-area: body;
+  overflow: auto;
 }

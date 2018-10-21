@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Provider } from '../context.js'
-import Layout from './Layout.jsx'
+import Media from 'react-media'
+import Layout from './Layout/Layout.jsx'
+import MobileSplashPage from './MobileSplashPage.jsx'
 import Header from './Header/Header.jsx'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs.jsx'
 import NavActions from './NavActions.jsx'
@@ -23,12 +25,21 @@ export default class App extends Component {
   render () {
     return (
       <Provider value={this.state}>
-        <Layout
-          Header={Header}
-          Banner={Breadcrumbs}
-          Sidebar={Sidebar}
-          Body={Detail}
-        />
+        <Media query="(max-width: 500px)">
+          {
+            isMobile =>
+              isMobile
+                ? <MobileSplashPage />
+                : (
+                  <Layout
+                    Header={Header}
+                    Banner={Breadcrumbs}
+                    Sidebar={Sidebar}
+                    Body={Detail}
+                  />
+                )
+          }
+        </Media>
       </Provider>
     )
   }
