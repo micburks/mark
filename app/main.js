@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron')
+const { resolve } = require('path')
 
 let win
 function create () {
@@ -6,6 +7,17 @@ function create () {
     width: 1000,
     height: 800
   }
+
+  BrowserWindow.addDevToolsExtension(
+    resolve(
+      '/Users/mickey', // Home Dir
+      'Library/Application\ Support/Google/Chrome', // Chrome location
+      'Profile\ 1', // Chrome profile
+      'Extensions',
+      'fmkadmapgofadopljbjfkapdkoienihi', // React dev tools id
+      '3.4.1_0'
+    )
+  )
 
   win = new BrowserWindow(options)
   win.loadFile('app/index.html')
