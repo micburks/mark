@@ -12,6 +12,12 @@ export default class NavActions extends Component {
     this.state = {
       modalVisible: false
     }
+
+    this.hideModal = this.hideModal.bind(this)
+  }
+
+  hideModal () {
+    this.setState({ modalVisible: false })
   }
 
   render () {
@@ -31,8 +37,8 @@ export default class NavActions extends Component {
               callback={() => this.setState({ modalVisible: true })}
             />
             {this.state.modalVisible && (
-              <Modal exit={() => this.setState({ modalVisible: false })} header="new">
-                <NewFileOrFolder />
+              <Modal exit={this.hideModal} header="new">
+                <NewFileOrFolder callback={this.hideModal} />
               </Modal>
             )}
           </ActionGroup>

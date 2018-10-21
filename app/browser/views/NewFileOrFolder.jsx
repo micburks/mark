@@ -1,50 +1,51 @@
 import React from 'react'
-import { join } from 'path'
-import { noOp, prevent } from '../utils/callback.js'
-import { mkNewDir, writeNewFile } from '../utils/file.js'
+import { getFilePath, NEW_FILE_TEMPLATE, mkNewDir, writeNewFile } from '../utils/file.js'
+import { Consumer } from '../context.js'
 
-// TODO: create file from template
-
-function getUniqueName (id) {
-  return `untitled-${id}`
-}
+const { assign } = Object
 
 function getUniqueId () {
-  return Math.random().toString(36).substring(7)
+  const id = Math.random().toString(36).substring(7)
+  const name = `untitled-${id}`
+
+  return { id, name }
 }
 
-export default class NewFileOrFolder extends React.Component {
+export default function Wrapper ({ callback }) {
+  return (
+    <Consumer>
+      {state => <NewFileOrFolder {...state} callback={callback} />}
+    </Consumer>
+  )
+}
+
+class NewFileOrFolder extends React.Component {
   constructor (props) {
     super(props)
 
-    const id = getUniqueId()
-    const name = getUniqueName(id)
-
-    this.state = {
-      id,
-      name,
+    this.state = assign(getUniqueId(), {
       type: 'file',
       error: null
-    }
+    })
 
     this.formChange = this.formChange.bind(this)
     this.formSubmit = this.formSubmit.bind(this)
   }
 
   formSubmit (e) {
-    prevent(e)
+    e.preventDefault()
 
-    const path = join(...this.props.path, this.state.name)
+    const path = getFilePath(this.props.path, this.state.name)
     let promise
 
     if (this.state.type === 'file') {
-      promise = writeNewFile(path, '')
+      promise = writeNewFile(path, NEW_FILE_TEMPLATE)
     } else {
       promise = mkNewDir(path)
     }
 
     promise .then(
-      () => this.props.callback(this.state.type),
+      this.props.callback,
       ({ message }) => this.setState({ error: message })
     )
   }
@@ -52,7 +53,10 @@ export default class NewFileOrFolder extends React.Component {
   formChange (e) {
     const { name, value } = e.target
 
-    this.setState({ [name]: value, error: null })
+    this.setState({
+      [name]: value,
+      error: null
+    })
   }
 
   render () {

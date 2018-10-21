@@ -96,3 +96,18 @@ export async function getFiles (path = '') {
   return Promise.all(files)
     .then(files => files.filter(isNotNull))
 }
+
+export function getFilePath (path, name) {
+  return join(...path, name)
+}
+
+export function getDirPath (path) {
+  return join(...path)
+}
+
+export const NEW_FILE_TEMPLATE =
+`# Title
+
+Body
+
+> Quote`

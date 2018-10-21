@@ -3,7 +3,7 @@
 ### Modals
 - [X] help section
 - [ ] config section
-- [ ] new file or folder
+- [X] new file or folder
 
 ### Electron
 - [ ] make installable
@@ -13,9 +13,13 @@
 ### Editing
 - [X] add buttons for save/edit/exit
 - [X] keep cache of changes
-- [ ] provide indicator for changed files
+- [X] provide indicator for changed files
 - [ ] when closing, warn about unsaved changes
 - [X] instead of always reading from disk, first check cache
+- [ ] delete file
+- [ ] rename file
+- [ ] delete folder
+- [ ] rename folder
 
 ### Style
 - [ ] get rid of unnecessary fonts

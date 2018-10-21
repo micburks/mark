@@ -1,9 +1,8 @@
 import './Detail.css'
 import React, { Component } from 'react'
 import mousetrap from 'mousetrap'
-import { join } from 'path'
 import { isNotNull } from '../../utils/type.js'
-import { readFile, writeFile } from '../../utils/file.js'
+import { getFilePath, readFile, writeFile } from '../../utils/file.js'
 import Editor from '../Editor.jsx'
 import Markdown from '../Markdown/Markdown.jsx'
 import { Consumer } from '../../context.js'
@@ -91,7 +90,7 @@ class Detail extends Component {
   }
 
   getFilePath () {
-    return join(...this.props.path, this.props.selected)
+    return getFilePath(this.props.path, this.props.selected)
   }
 
   toggleEdit () {
