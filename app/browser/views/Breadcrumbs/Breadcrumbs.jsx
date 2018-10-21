@@ -35,9 +35,13 @@ function isLast (arr, index) {
 function BreadcrumbLink ({ selectDir, path, index, children }) {
   const lastCrumb = isLast(path, index)
 
-  const callback = lastCrumb
-    ? () => {}
-    : () => selectDir(path.slice(0, index + 1))
+  const callback = e => {
+    e.preventDefault()
+
+    if (!lastCrumb) {
+      selectDir(path.slice(0, index + 1))
+    }
+  }
 
   const classes = cn('Breadcrumbs-link', {
     'Breadcrumbs-link--disabled': lastCrumb
@@ -45,7 +49,7 @@ function BreadcrumbLink ({ selectDir, path, index, children }) {
 
   return (
     <span className="Breadcrumbs-item">
-      <a className={classes} href="" onClick={prevent(callback)}>
+      <a className={classes} href="" onClick={callback}>
         {children}
       </a>
       {' / '}
