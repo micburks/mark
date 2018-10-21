@@ -2,7 +2,8 @@
   border-collapse: collapse;
   font-family: var(--body);
   text-align: left;
-  width: 750px;
+  min-width: 500px;
+  max-width: 900px;
 }
 
 .Help th,
