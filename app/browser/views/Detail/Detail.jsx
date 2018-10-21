@@ -24,65 +24,98 @@ class Detail extends Component {
 
     this.state = {
       editing: false,
-      contents: null
+      contents: null,
+      hasUnsavedChanges: false
     }
 
     this.save = this.save.bind(this)
     this.setUnsaved = this.setUnsaved.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
-  }
-
-  toggleEdit () {
-    if (isNotNull(this.props.selected)) {
-      this.setState(prevState => ({ editing: !prevState.editing }))
-    }
+    this.exitEditor = this.exitEditor.bind(this)
   }
 
   componentDidMount () {
     mousetrap.bind(['command+s', 'ctrl+s'], this.save)
     mousetrap.bind(['command+e', 'ctrl+e'], this.toggleEdit)
 
-    this.readFile()
-  }
-
-  readFile () {
+    // Read file
     if (this.props.selected) {
       const path = this.getFilePath()
 
       if (fileCache.has(path)) {
-        this.setState({ contents: fileCache.get(path) })
+        // Read file from cache of unsaved changes
+        this.setState({
+          contents: fileCache.get(path),
+          hasUnsavedChanges: true
+        })
       } else {
+        // Read file from disk
         readFile(path)
           .then(contents => {
-            this.setState({ contents })
+            this.setState({
+              contents,
+              hasUnsavedChanges: false
+            })
           })
       }
     }
+  }
+
+  save () {
+    const path = this.getFilePath()
+
+    // If there are unsaved changes in the cache
+    if (fileCache.has(path)) {
+      const contents = fileCache.get(path)
+
+      writeFile(path, contents)
+        .then(() => {
+          this.setState({
+            contents,
+            hasUnsavedChanges: false
+          })
+
+          // Clear from cache
+          fileCache.clear(path)
+
+          console.log('saved')
+          // this.props.showSaved(this.props.file.name)
+        })
+    }
+  }
+
+  setUnsaved (contents) {
+    // Set in cache
+    fileCache.set(this.getFilePath(), contents)
+    this.setState({ hasUnsavedChanges: true })
   }
 
   getFilePath () {
     return join(...this.props.path, this.props.selected)
   }
 
-  save () {
-    const path = this.getFilePath()
-    const contents = fileCache.get(path) || this.state.contents
-
-    writeFile(path, contents)
-      .then(() => {
-        this.setState({ contents })
-
-        // clear from cache
-        fileCache.clear(path)
-
-        console.log('saved')
-        // this.props.showSaved(this.props.file.name)
-      })
+  toggleEdit () {
+    this.setState(prevState => {
+      if (prevState.editing) {
+        this.exitEditor()
+      } else {
+        return { editing: true }
+      }
+    })
   }
 
-  setUnsaved (contents) {
-    // set in cache
-    fileCache.set(this.getFilePath(), contents)
+  exitEditor () {
+    this.setState(prevState => {
+      const newState = {
+        editing: false
+      }
+
+      if (prevState.hasUnsavedChanges) {
+        newState.contents = fileCache.get(this.getFilePath())
+      }
+
+      return newState
+    })
   }
 
   render () {
@@ -95,12 +128,15 @@ class Detail extends Component {
       )
     }
 
-
     return (
       <div style={{ margin: 'auto', maxWidth: '800px' }}>
         <ActionGroup>
-          <ActionButton callback={this.save} disabled={!this.state.editing}>Save</ActionButton>
-          <ActionButton callback={this.toggleEdit}>{this.state.editing ? 'Exit' : 'Edit'}</ActionButton>
+          <ActionButton callback={this.save} disabled={!this.state.hasUnsavedChanges}>Save</ActionButton>
+          {
+            this.state.editing
+              ? <ActionButton callback={this.exitEditor}>Exit</ActionButton>
+              : <ActionButton callback={() => this.setState({ editing: true })}>Edit</ActionButton>
+          }
         </ActionGroup>
         {
           this.state.editing
@@ -108,7 +144,7 @@ class Detail extends Component {
               <Editor contents={this.state.contents}
                 save={this.save}
                 setUnsaved={this.setUnsaved}
-                exit={() => this.setState({ editing: false })}
+                exit={this.exitEditor}
               />
             )
             : <Markdown className="Detail" markdown={this.state.contents} />
