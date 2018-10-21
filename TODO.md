@@ -11,7 +11,7 @@
 - [ ] choose dir from menu
 
 ### Editing
-- [ ] add buttons for save/edit/exit
+- [X] add buttons for save/edit/exit
 - [ ] keep cache of changes
 - [ ] provide indicator for changed files
 - [ ] when closing, warn about unsaved changes

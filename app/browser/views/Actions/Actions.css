@@ -23,6 +23,22 @@
   text-decoration: none!important;
 }
 
+.Action-button {
+  background-color: var(--primary);
+  border: 1px solid var(--dark);
+  border-radius: 1px;
+  color: var(--dark);
+  letter-spacing: 1px;
+  font-family: var(--accent);
+  padding: var(--1gu) var(--2gu);
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase;
+}
+
+.Action-button.Action--disabled {
+  background-color: var(--medium);
+}
+
 .Action--toggle * {
   cursor: pointer;
   display: inline-block;

@@ -7,6 +7,8 @@ import { readFile, writeFile } from '../../utils/file.js'
 import Editor from '../Editor.jsx'
 import Markdown from '../Markdown/Markdown.jsx'
 import { Consumer } from '../../context.js'
+import { ActionGroup, ActionButton } from '../Actions/Actions.jsx'
+import fileCache from '../../utils/fileCache.js'
 
 export default function Wrapper () {
   return (
@@ -27,23 +29,18 @@ class Detail extends Component {
 
     this.save = this.save.bind(this)
     this.setUnsaved = this.setUnsaved.bind(this)
+    this.toggleEdit = this.toggleEdit.bind(this)
+  }
+
+  toggleEdit () {
+    if (isNotNull(this.props.selected)) {
+      this.setState(prevState => ({ editing: !prevState.editing }))
+    }
   }
 
   componentDidMount () {
-    // Save - should this be here?
-    mousetrap.bind(['command+s', 'ctrl+s'], () => {
-      if (isNotNull(this.props.file)) {
-        console.log('cant save: i have no content')
-        // this.save()
-      }
-    })
-
-    // Edit
-    mousetrap.bind(['command+e', 'ctrl+e'], () => {
-      if (isNotNull(this.props.selected)) {
-        this.setState(prevState => ({ editing: !prevState.editing }))
-      }
-    })
+    mousetrap.bind(['command+s', 'ctrl+s'], this.save)
+    mousetrap.bind(['command+e', 'ctrl+e'], this.toggleEdit)
 
     this.readFile()
   }
@@ -57,20 +54,29 @@ class Detail extends Component {
     }
   }
 
-  save (contents) {
-    const path = join(...this.props.path, this.props.selected)
+  getFilePath () {
+    return join(...this.props.path, this.props.selected)
+  }
+
+  save () {
+    const path = this.getFilePath()
+    const contents = fileCache.get(path) || this.state.contents
 
     writeFile(path, contents)
       .then(() => {
-        console.log('saved')
         this.setState({ contents })
+
         // clear from cache
+        fileCache.clear(path)
+
+        console.log('saved')
         // this.props.showSaved(this.props.file.name)
       })
   }
 
   setUnsaved (contents) {
     // set in cache
+    fileCache.set(this.getFilePath(), contents)
   }
 
   render () {
@@ -84,18 +90,24 @@ class Detail extends Component {
     }
 
 
-    if (this.state.editing) {
-      // Editing file contents
-      return (
-        <Editor contents={this.state.contents}
-          save={val => this.save(val)}
-          setUnsaved={this.setUnsaved}
-          exit={() => this.setState({ editing: false })}
-        />
-      )
-    } else {
-      // Not editing file contents
-      return <Markdown className="Detail" markdown={this.state.contents} />
-    }
+    return (
+      <div style={{ margin: 'auto', maxWidth: '800px' }}>
+        <ActionGroup>
+          <ActionButton callback={this.save} disabled={!this.state.editing}>Save</ActionButton>
+          <ActionButton callback={this.toggleEdit}>{this.state.editing ? 'Exit' : 'Edit'}</ActionButton>
+        </ActionGroup>
+        {
+          this.state.editing
+            ? (
+              <Editor contents={this.state.contents}
+                save={this.save}
+                setUnsaved={this.setUnsaved}
+                exit={() => this.setState({ editing: false })}
+              />
+            )
+            : <Markdown className="Detail" markdown={this.state.contents} />
+        }
+      </div>
+    )
   }
 }

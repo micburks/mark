@@ -13,6 +13,10 @@ const codemirrorConfig = {
   viewportMargin: Infinity
 }
 
+function mergeConfig (options) {
+  return Object.assign({}, codemirrorConfig, options)
+}
+
 function getElement () {
   return document.getElementById('Detail-editor')
 }
@@ -26,7 +30,7 @@ export default class Editor extends React.Component {
   componentDidMount () {
     editor = codemirror.fromTextArea(
       getElement(),
-      Object.assign({}, codemirrorConfig, { keyMap: this.props.mode || 'default' })
+      mergeConfig({ keyMap: this.props.mode || 'default' })
     )
 
     if (this.props.mode === 'vim') {
@@ -57,10 +61,15 @@ export default class Editor extends React.Component {
 
     editor.on('change', (cm, e) => {
       console.log('changed')
-      this.props.setUnsaved()
+      this.setUnsaved()
     })
 
     editor.focus()
+  }
+
+  setUnsaved () {
+    editor.save()
+    this.props.setUnsaved(getValue())
   }
 
   save () {
@@ -69,7 +78,7 @@ export default class Editor extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('gone')
+    console.log('unmounting Editor')
     if (editor) {
       editor.toTextArea()
       editor = null
