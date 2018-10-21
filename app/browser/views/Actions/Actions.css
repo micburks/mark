@@ -30,6 +30,7 @@
   color: var(--dark);
   letter-spacing: 1px;
   font-family: var(--accent);
+  font-weight: normal;
   padding: var(--1gu) var(--2gu);
   text-rendering: optimizeLegibility;
   text-transform: uppercase;
