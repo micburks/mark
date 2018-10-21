@@ -12,10 +12,10 @@
 
 ### Editing
 - [X] add buttons for save/edit/exit
-- [ ] keep cache of changes
+- [X] keep cache of changes
 - [ ] provide indicator for changed files
 - [ ] when closing, warn about unsaved changes
-- [ ] instead of always reading from disk, first check cache
+- [X] instead of always reading from disk, first check cache
 
 ### Style
 - [ ] get rid of unnecessary fonts

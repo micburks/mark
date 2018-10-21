@@ -12,7 +12,11 @@ class Cache {
   }
 
   clear (key) {
-    this.__cache__[key] = null
+    delete this.__cache__[key]
+  }
+
+  has (key) {
+    return key in this.__cache__
   }
 }
 

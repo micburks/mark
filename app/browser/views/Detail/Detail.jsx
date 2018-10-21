@@ -47,10 +47,16 @@ class Detail extends Component {
 
   readFile () {
     if (this.props.selected) {
-      const path = join(...this.props.path, this.props.selected)
+      const path = this.getFilePath()
 
-      readFile(path)
-        .then(contents => this.setState({ contents }))
+      if (fileCache.has(path)) {
+        this.setState({ contents: fileCache.get(path) })
+      } else {
+        readFile(path)
+          .then(contents => {
+            this.setState({ contents })
+          })
+      }
     }
   }
 
