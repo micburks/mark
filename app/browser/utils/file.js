@@ -1,6 +1,6 @@
 import { join } from 'path'
 import { promisify } from 'util'
-import { default as fs, readdir } from 'fs'
+import fs, { readdir } from 'fs'
 import { isNotNull } from './type.js'
 
 const stat = promisify(fs.stat)
@@ -50,7 +50,7 @@ export function getRoot () {
 const isMd = name => /\.md$/.test(name)
 const hasNoExt = name => /^[^.]+$/.test(name)
 const isDotfile = name => /^\./.test(name)
-const hasMdOrNoExt = name => (isMd(name) || hasNoExt(name))
+// const hasMdOrNoExt = name => (isMd(name) || hasNoExt(name))
 
 async function isDir (path) {
   const stats = await stat(path)
@@ -58,7 +58,6 @@ async function isDir (path) {
 }
 
 export async function getFiles (path = '') {
-  let error = null
   let files = []
 
   try {
@@ -88,7 +87,6 @@ export async function getFiles (path = '') {
         return result
       })
       .filter(isNotNull)
-
   } catch (e) {
     console.error(e)
   }

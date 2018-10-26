@@ -1,4 +1,4 @@
-export const noOp = ()=>{}
+export const noOp = () => {}
 
 export function stop (e) {
   e.stopPropagation()

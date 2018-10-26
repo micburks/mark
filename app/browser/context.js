@@ -7,4 +7,4 @@ const { Provider, Consumer } = createContext({
   selectFile: () => {}
 })
 
-export { Consumer, Provider } 
+export { Consumer, Provider }
