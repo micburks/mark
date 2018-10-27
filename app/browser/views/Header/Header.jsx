@@ -23,6 +23,7 @@ export default class Header extends Component {
   render () {
     return (
       <div className="Header">
+        <div>{/* spacer - account for window frame buttons */}</div>
         <h1 className="Header-text">markdown browser</h1>
         <div className="Header-action Action Action--toggle">
           <InfoIcon onClick={() => this.setState({ type: 'help', modalVisible: true })} />

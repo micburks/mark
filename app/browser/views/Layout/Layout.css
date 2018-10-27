@@ -7,7 +7,7 @@
     "banner banner"
     "sidebar body"
   ;
-  padding-top: 55px;
+  padding-top: var(--1gu);
 }
 
 .Layout-cell--header {
@@ -20,6 +20,7 @@
 
 .Layout-cell--banner {
   grid-area: banner;
+  padding-top: var(--2gu);
 }
 
 .Layout-cell--sidebar {
