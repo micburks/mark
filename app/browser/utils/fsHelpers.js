@@ -103,8 +103,7 @@ export function getDirPath (path) {
   return join(...path)
 }
 
-export const NEW_FILE_TEMPLATE =
-`# Title
+export const NEW_FILE_TEMPLATE = `# Title
 
 Body
 

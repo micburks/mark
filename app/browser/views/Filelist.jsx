@@ -2,10 +2,10 @@ import React, { Component, Fragment } from 'react'
 import cn from 'classnames'
 import { watch } from 'fs'
 import { onEnter } from '../utils/callback.js'
-import { getDirPath, getFilePath, getFiles } from '../utils/file.js'
+import { getDirPath, getFilePath, getFiles } from '../utils/fsHelpers.js'
 import { DirIcon } from './Icons.jsx'
 import { Consumer } from '../context.js'
-import fileCache from '../utils/fileCache.js'
+import fileCache from '../utils/cache.js'
 
 const { assign } = Object
 

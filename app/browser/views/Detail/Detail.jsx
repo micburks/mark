@@ -2,12 +2,12 @@ import './Detail.css'
 import React, { Component } from 'react'
 import mousetrap from 'mousetrap'
 import { isNotNull } from '../../utils/type.js'
-import { getFilePath, readFile, writeFile } from '../../utils/file.js'
+import { getFilePath, readFile, writeFile } from '../../utils/fsHelpers.js'
 import Editor from '../Editor.jsx'
 import Markdown from '../Markdown/Markdown.jsx'
 import { Consumer } from '../../context.js'
 import { ActionGroup, ActionButton } from '../Actions/Actions.jsx'
-import fileCache from '../../utils/fileCache.js'
+import fileCache from '../../utils/cache.js'
 
 export default function Wrapper () {
   return (

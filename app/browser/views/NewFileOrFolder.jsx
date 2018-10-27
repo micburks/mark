@@ -1,5 +1,5 @@
 import React from 'react'
-import { getFilePath, NEW_FILE_TEMPLATE, mkNewDir, writeNewFile } from '../utils/file.js'
+import { getFilePath, NEW_FILE_TEMPLATE, mkNewDir, writeNewFile } from '../utils/fsHelpers.js'
 import { Consumer } from '../context.js'
 
 const { assign } = Object
