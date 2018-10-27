@@ -3,7 +3,6 @@ import { Provider } from '../context.js'
 import Media from 'react-media'
 import Layout, { JustifyBetween } from './Layout/Layout.jsx'
 import MobileSplashPage from './MobileSplashPage.jsx'
-import Header from './Header/Header.jsx'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs.jsx'
 import Settings from './Settings.jsx'
 import NavActions from './NavActions.jsx'
@@ -32,7 +31,6 @@ export default class App extends Component {
               <MobileSplashPage />
             ) : (
               <Layout
-                Header={Header}
                 Banner={Banner}
                 Sidebar={Sidebar}
                 Body={Detail}

@@ -1,12 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Layout.css'
 
-export default function Layout ({ Header, Banner, Sidebar, Body }) {
+export default function Layout ({ Banner, Sidebar, Body }) {
   return (
     <div className="Layout">
-      <div className="Layout-cell--header">
-        <Header/>
-      </div>
       <div className="Layout-cell--banner">
         <Banner />
       </div>
@@ -18,6 +16,12 @@ export default function Layout ({ Header, Banner, Sidebar, Body }) {
       </div>
     </div>
   )
+}
+
+Layout.propTypes = {
+  Banner: PropTypes.element.isRequired,
+  Sidebar: PropTypes.element.isRequired,
+  Body: PropTypes.element.isRequired
 }
 
 export function JustifyBetween (props) {

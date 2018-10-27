@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { InfoIcon, MoreIcon } from './Icons.jsx'
 import Help from './Help/Help.jsx'
 import Modal from './Modal/Modal.jsx'
