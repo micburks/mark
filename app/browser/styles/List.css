@@ -11,6 +11,7 @@
   cursor: pointer;
   display: flex;
   padding: var(--2gu);
+  outline: none;
 }
 
 .List-item--message {
@@ -18,7 +19,8 @@
   text-align: center;
 }
 
-.List-item:hover {
+.List-item:hover,
+.List-item:focus {
   background-color: var(--faint);
 }
 
