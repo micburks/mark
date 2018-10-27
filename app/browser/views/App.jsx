@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { Provider } from '../context.js'
 import Media from 'react-media'
-import Layout from './Layout/Layout.jsx'
+import Layout, { JustifyBetween } from './Layout/Layout.jsx'
 import MobileSplashPage from './MobileSplashPage.jsx'
 import Header from './Header/Header.jsx'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs.jsx'
+import Settings from './Settings.jsx'
 import NavActions from './NavActions.jsx'
 import Filelist from './Filelist.jsx'
 import Detail from './Detail/Detail.jsx'
@@ -26,23 +27,31 @@ export default class App extends Component {
     return (
       <Provider value={this.state}>
         <Media query="(max-width: 500px)">
-          {
-            isMobile =>
-              isMobile
-                ? <MobileSplashPage />
-                : (
-                  <Layout
-                    Header={Header}
-                    Banner={Breadcrumbs}
-                    Sidebar={Sidebar}
-                    Body={Detail}
-                  />
-                )
+          {isMobile =>
+            isMobile ? (
+              <MobileSplashPage />
+            ) : (
+              <Layout
+                Header={Header}
+                Banner={Banner}
+                Sidebar={Sidebar}
+                Body={Detail}
+              />
+            )
           }
         </Media>
       </Provider>
     )
   }
+}
+
+function Banner () {
+  return (
+    <JustifyBetween>
+      <Breadcrumbs />
+      <Settings />
+    </JustifyBetween>
+  )
 }
 
 function Sidebar () {

@@ -19,3 +19,11 @@ export default function Layout ({ Header, Banner, Sidebar, Body }) {
     </div>
   )
 }
+
+export function JustifyBetween (props) {
+  return (
+    <div className="u-justifyBetween">
+      {props.children}
+    </div>
+  )
+}

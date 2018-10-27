@@ -1,3 +1,8 @@
 .u-hide {
   display: none!important;
 }
+
+.u-justifyBetween {
+  display: flex;
+  justify-content: space-between;
+}
