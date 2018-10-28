@@ -24,21 +24,21 @@ export default class App extends Component {
 
   render () {
     return (
-      <Provider value={this.state}>
+      <Context.Provider value={this.state}>
         <Media query="(max-width: 500px)">
           {isMobile =>
             isMobile ? (
               <MobileSplashPage />
             ) : (
               <Layout
-                Banner={Banner}
-                Sidebar={Sidebar}
-                Body={Detail}
+                banner={<Banner/>}
+                sidebar={<Sidebar/>}
+                body={<Detail/>}
               />
             )
           }
         </Media>
-      </Provider>
+      </Context.Provider>
     )
   }
 }

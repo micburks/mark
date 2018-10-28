@@ -9,13 +9,8 @@ import { Consumer } from '../../context.js'
 import { ActionGroup, ActionButton } from '../Actions/Actions.jsx'
 import fileCache from '../../utils/cache.js'
 
-export default function Wrapper () {
-  return (
-    <Consumer>
-      {({ path, selected }) => <Detail path={path} selected={selected} key={selected} />}
-    </Consumer>
-  )
-}
+export default class Detail extends PureComponent {
+  static contextType = Context
 
 class Detail extends Component {
   constructor (props) {
@@ -36,9 +31,12 @@ class Detail extends Component {
   componentDidMount () {
     mousetrap.bind(['command+s', 'ctrl+s'], this.save)
     mousetrap.bind(['command+e', 'ctrl+e'], this.toggleEdit)
+  }
 
+  // TODO: Better with PureComponent, but still need to check cache
+  componentDidUpdate () {
     // Read file
-    if (this.props.selected) {
+    if (this.context.selected) {
       const path = this.getFilePath()
 
       if (fileCache.has(path)) {
@@ -119,7 +117,7 @@ class Detail extends Component {
 
   render () {
     // Need selected file and its contents to display anything
-    if (this.props.selected === null || this.state.contents === null) {
+    if (this.context.selected === null || this.state.contents === null) {
       return (
         <div className="Detail Detail--empty">
           No file selected

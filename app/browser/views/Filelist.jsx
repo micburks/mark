@@ -4,24 +4,14 @@ import { watch } from 'fs'
 import { onEnter } from '../utils/callback.js'
 import { getDirPath, getFilePath, getFiles } from '../utils/fsHelpers.js'
 import { DirIcon } from './Icons.jsx'
-import { Consumer } from '../context.js'
+import Context from '../context.js'
 import fileCache from '../utils/cache.js'
-
-const { assign } = Object
-
-export default function Wrapper (props) {
-  return (
-    <Consumer>
-      {state => <Filelist {...state} key={state.path.join('/')} />}
-    </Consumer>
-  )
-}
 
 function setUnsavedChanges (path, file) {
   if (file.isDir) {
     return file
   } else {
-    return assign({}, file, {
+    return Object.assign({}, file, {
       hasUnsavedChanges: hasUnsavedChanges(path, file.name)
     })
   }
@@ -31,7 +21,9 @@ function hasUnsavedChanges(path, name) {
   return fileCache.has(getFilePath(path, name))
 }
 
-class Filelist extends Component {
+export default class Filelist extends Component {
+  static contextType = Context
+
   constructor (props) {
     super(props)
 
@@ -45,10 +37,10 @@ class Filelist extends Component {
   }
 
   async retrieveFiles () {
-    const files = await getFiles(getDirPath(this.props.path))
+    const files = await getFiles(getDirPath(this.context.path))
 
     this.setState({
-      files: files.map(file => setUnsavedChanges(this.props.path, file))
+      files: files.map(file => setUnsavedChanges(this.context.path, file))
     })
   }
 
@@ -61,14 +53,19 @@ class Filelist extends Component {
 
     // Create a filesystem watcher and keep a reference to it
     this.setState({
-      watcher: watch(getDirPath(this.props.path), this.retrieveFiles)
+      watcher: watch(getDirPath(this.context.path), this.retrieveFiles)
     })
+  }
+
+  // TODO: This is bad. Calling everytime
+  componentDidUpdate () {
+    this.retrieveFiles()
   }
 
   mapUnsavedChanges () {
     // Map over current file list and the 'unsaved' flag
     this.setState(prevState => ({
-      files: prevState.files.map(file => setUnsavedChanges(this.props.path, file))
+      files: prevState.files.map(file => setUnsavedChanges(this.context.path, file))
     }))
   }
 
@@ -82,7 +79,7 @@ class Filelist extends Component {
     const { files } = this.state
 
     return (files.length > 0)
-      ? <List {...this.props} files={files} />
+      ? <List {...this.context} files={files} />
       : <EmptyList />
   }
 }

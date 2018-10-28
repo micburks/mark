@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { LeftIcon, PlusIcon } from './Icons.jsx'
-import { Consumer } from '../context.js'
+import Context from '../context.js'
 import Modal from './Modal/Modal.jsx'
 import NewFileOrFolder from './NewFileOrFolder.jsx'
 import { Action, ActionGroup } from './Actions/Actions.jsx'
 
 export default class NavActions extends Component {
+  static contextType = Context
   constructor (props) {
     super(props)
 
@@ -21,9 +22,9 @@ export default class NavActions extends Component {
   }
 
   render () {
+    const { path, selectDir } = this.context
+
     return (
-      <Consumer>
-        {({ path, selectDir }) => (
           <ActionGroup>
             <Action text="BACK"
               Icon={LeftIcon}
@@ -42,8 +43,6 @@ export default class NavActions extends Component {
               </Modal>
             )}
           </ActionGroup>
-        )}
-      </Consumer>
     )
   }
 }

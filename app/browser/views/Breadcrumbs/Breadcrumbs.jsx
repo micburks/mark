@@ -1,31 +1,33 @@
 import './Breadcrumbs.css'
-import React from 'react'
+import React, { Component } from 'react'
 import cn from 'classnames'
 import { prevent } from '../../utils/callback.js'
-import { Consumer } from '../../context.js'
+import Context from '../../context.js'
 
 const ROOT_DIR = []
 
-export default function Breadcrumbs (props) {
-  return (
-    <Consumer>
-      {({ path, selectDir }) => (
-        <small className="Breadcrumbs">
-          {(path.length > 0) && (
-            <span className="Breadcrumbs-item">
-              <a className="Breadcrumbs-link" href="" onClick={prevent(() => selectDir(ROOT_DIR))}>root</a>
-              {' / '}
-            </span>
-          )}
-          {path && path.map((slug, index) =>
-            <BreadcrumbLink key={index} path={path} index={index} selectDir={selectDir}>
-              {slug}
-            </BreadcrumbLink>
-          )}
-        </small>
-      )}
-    </Consumer>
-  )
+export default class Breadcrumbs extends Component {
+  static contextType = Context
+
+  render () {
+    const { path, selectDir } = this.context
+
+    return (
+      <small className="Breadcrumbs">
+        {(path.length > 0) && (
+          <span className="Breadcrumbs-item">
+            <a className="Breadcrumbs-link" href="" onClick={prevent(() => selectDir(ROOT_DIR))}>root</a>
+            {' / '}
+          </span>
+        )}
+        {path && path.map((slug, index) =>
+          <BreadcrumbLink key={index} path={path} index={index} selectDir={selectDir}>
+            {slug}
+          </BreadcrumbLink>
+        )}
+      </small>
+    )
+  }
 }
 
 function isLast (arr, index) {

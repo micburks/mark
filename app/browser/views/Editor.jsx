@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import codemirror from 'codemirror'
 import 'codemirror/mode/markdown/markdown'
 import 'codemirror/keymap/vim.js'
@@ -26,7 +26,7 @@ function getValue () {
 }
 
 let editor
-export default class Editor extends React.Component {
+export default class Editor extends Component {
   componentDidMount () {
     editor = codemirror.fromTextArea(
       getElement(),

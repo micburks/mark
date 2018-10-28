@@ -1,10 +1,8 @@
 import { createContext } from 'react'
 
-const { Provider, Consumer } = createContext({
+export default createContext({
   path: [],
   selected: null,
   selectDir: () => {},
   selectFile: () => {}
 })
-
-export { Consumer, Provider }

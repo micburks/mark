@@ -1,8 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { getFilePath, NEW_FILE_TEMPLATE, mkNewDir, writeNewFile } from '../utils/fsHelpers.js'
-import { Consumer } from '../context.js'
-
-const { assign } = Object
+import Context from '../context.js'
 
 function getUniqueId () {
   const id = Math.random().toString(36).substring(7)
@@ -11,22 +9,16 @@ function getUniqueId () {
   return { id, name }
 }
 
-export default function Wrapper ({ callback }) {
-  return (
-    <Consumer>
-      {state => <NewFileOrFolder {...state} callback={callback} />}
-    </Consumer>
-  )
-}
+export default class NewFileOrFolder extends Component {
+  static contextType = Context
 
-class NewFileOrFolder extends React.Component {
+  state = Object.assign(getUniqueId(), {
+    type: 'file',
+    error: null
+  })
+
   constructor (props) {
     super(props)
-
-    this.state = assign(getUniqueId(), {
-      type: 'file',
-      error: null
-    })
 
     this.formChange = this.formChange.bind(this)
     this.formSubmit = this.formSubmit.bind(this)
@@ -35,7 +27,7 @@ class NewFileOrFolder extends React.Component {
   formSubmit (e) {
     e.preventDefault()
 
-    const path = getFilePath(this.props.path, this.state.name)
+    const path = getFilePath(this.context.path, this.state.name)
     let promise
 
     if (this.state.type === 'file') {
@@ -45,7 +37,7 @@ class NewFileOrFolder extends React.Component {
     }
 
     promise .then(
-      this.props.callback,
+      this.context.callback,
       ({ message }) => this.setState({ error: message })
     )
   }
