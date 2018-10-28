@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import cn from 'classnames'
 import { watch } from 'fs'
 import { onEnter } from '../utils/callback.js'
@@ -24,13 +24,13 @@ function hasUnsavedChanges(path, name) {
 export default class Filelist extends Component {
   static contextType = Context
 
+  state = {
+    files: [],
+    watcher: null
+  }
+
   constructor (props) {
     super(props)
-
-    this.state = {
-      files: [],
-      watcher: null
-    }
 
     this.retrieveFiles = this.retrieveFiles.bind(this)
     this.mapUnsavedChanges = this.mapUnsavedChanges.bind(this)

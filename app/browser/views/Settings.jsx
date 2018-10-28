@@ -4,13 +4,13 @@ import Help from './Help/Help.jsx'
 import Modal from './Modal/Modal.jsx'
 
 export default class Settings extends Component {
+  state = {
+    modalVisible: false,
+    type: null
+  }
+
   constructor (props) {
     super(props)
-
-    this.state = {
-      modalVisible: false,
-      type: null
-    }
 
     this.hideModal = this.hideModal.bind(this)
   }

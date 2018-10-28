@@ -1,26 +1,24 @@
 import './Detail.css'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import mousetrap from 'mousetrap'
-import { isNotNull } from '../../utils/type.js'
 import { getFilePath, readFile, writeFile } from '../../utils/fsHelpers.js'
 import Editor from '../Editor.jsx'
 import Markdown from '../Markdown/Markdown.jsx'
-import { Consumer } from '../../context.js'
+import Context from '../../context.js'
 import { ActionGroup, ActionButton } from '../Actions/Actions.jsx'
 import fileCache from '../../utils/cache.js'
 
 export default class Detail extends PureComponent {
   static contextType = Context
 
-class Detail extends Component {
+  state = {
+    editing: false,
+    contents: null,
+    hasUnsavedChanges: false
+  }
+
   constructor (props) {
     super(props)
-
-    this.state = {
-      editing: false,
-      contents: null,
-      hasUnsavedChanges: false
-    }
 
     this.save = this.save.bind(this)
     this.setUnsaved = this.setUnsaved.bind(this)
@@ -59,6 +57,7 @@ class Detail extends Component {
   }
 
   save () {
+    console.log('save')
     const path = this.getFilePath()
 
     // If there are unsaved changes in the cache
@@ -88,7 +87,7 @@ class Detail extends Component {
   }
 
   getFilePath () {
-    return getFilePath(this.props.path, this.props.selected)
+    return getFilePath(this.context.path, this.context.selected)
   }
 
   toggleEdit () {

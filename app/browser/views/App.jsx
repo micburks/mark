@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Provider } from '../context.js'
+import Context from '../context.js'
 import Media from 'react-media'
 import Layout, { JustifyBetween } from './Layout/Layout.jsx'
 import MobileSplashPage from './MobileSplashPage.jsx'
@@ -10,16 +10,12 @@ import Filelist from './Filelist.jsx'
 import Detail from './Detail/Detail.jsx'
 
 export default class App extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      path: [],
-      selected: null,
-      selectDir: path => this.setState({ path, selected: null }),
-      selectFile: selected => this.setState({ selected }),
-      config: {}
-    }
+  state = {
+    path: [],
+    selected: null,
+    selectDir: path => this.setState({ path, selected: null }),
+    selectFile: selected => this.setState({ selected }),
+    config: {}
   }
 
   render () {
