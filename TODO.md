@@ -21,6 +21,9 @@
 - [ ] delete folder
 - [ ] rename folder
 - [ ] when leaving exit mode, remove file from unsaved cache if the contents haven't changed from the disk version
+- [ ] get rid of codemirror, syntax highlighting isn't all that great anyway, styles are bad, but it has vim...
+- [ ] last edited timestamp, similar to notes
+- [ ] autosave? undo?
 
 ### Style
 - [ ] get rid of unnecessary fonts
