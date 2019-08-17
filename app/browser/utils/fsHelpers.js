@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { promisify } from 'util'
 import fs, { readdir } from 'fs'
 import { isNotNull } from './type.js'
@@ -39,12 +39,14 @@ export const mkNewDir = reversePromise(
   'Name in use; Directory cannot be created'
 )
 
+let root
+export function setRoot (rootPath) {
+  root = rootPath || resolve()
+}
+
 export function getRoot () {
-  if (process.argv > 2) {
-    return process.argv[2]
-  } else {
-    return process.cwd()
-  }
+  console.log('getroot')
+  return root || process.cwd()
 }
 
 const isMd = name => /\.md$/.test(name)
@@ -96,7 +98,8 @@ export async function getFiles (path = '') {
 }
 
 export function getFilePath (path, name) {
-  return join(...path, name)
+  console.log(getRoot(), path, name)
+  return join(getRoot(), ...path, name)
 }
 
 export function getDirPath (path) {

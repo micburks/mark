@@ -17,7 +17,7 @@ function setUnsavedChanges (path, file) {
   }
 }
 
-function hasUnsavedChanges(path, name) {
+function hasUnsavedChanges (path, name) {
   return fileCache.has(getFilePath(path, name))
 }
 
@@ -132,7 +132,7 @@ function File ({ isSelected, isDir, path, name, selectDir, selectFile, children,
       tabIndex="0"
     >
       {isDir && <DirIcon />}
-      {hasUnsavedChanges && <small style={{marginRight: 'var(--1gu)'}}>( UNSAVED )</small>}
+      {hasUnsavedChanges && <small style={{ marginRight: 'var(--1gu)' }}>( UNSAVED )</small>}
       {children}
     </li>
   )
