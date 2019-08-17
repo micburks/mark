@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Markdown viewer/editor",
   "main": "app/main.js",
+  "bin": "./bin/cli.js",
   "scripts": {
     "build": "parcel build app/browser/index.jsx --cache-dir build/cache --target node",
     "build:watch": "parcel watch app/browser/index.jsx --cache-dir build/cache --target node --no-hmr",
