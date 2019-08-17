@@ -7,8 +7,9 @@
 
 ### Electron
 - [ ] make installable
-- [ ] start app without a default dir
+- [X] start app without a default dir
 - [ ] choose dir from menu
+- [X] binary for npm install
 
 ### Editing
 - [X] add buttons for save/edit/exit
@@ -24,7 +25,10 @@
 - [ ] get rid of codemirror, syntax highlighting isn't all that great anyway, styles are bad, but it has vim...
 - [ ] last edited timestamp, similar to notes
 - [ ] autosave? undo?
+- [ ] performance bug: getRoot is called in an infinite loop
 
 ### Style
 - [ ] get rid of unnecessary fonts
 - [ ] responsive design for small screens
+- [ ] add title bar back and put the init path there
+- [ ] bug: can't drag window without title bar
